@@ -1,4 +1,6 @@
-// Functional prototypes
+"use strict";
+
+/* // Functional prototypes
 // Class-based prototypes
 // Object-create() function
 
@@ -64,4 +66,65 @@ computer1.depositMoney(2500);
 console.log(computer1.bank);
 
 // console.log(computer1.password);
-// console.log(computer1.#password);
+// console.log(computer1.#password); */
+
+/* const obj = {
+  number: 1990,
+};
+
+console.log(obj.hasOwnProperty("number"));
+
+class Test {
+  // birthYear = 1990;
+  constructor(birthYear) {
+    this.birthYear = this.birthYear;
+  }
+}
+
+const testObj = new Test(1995);
+
+console.log(testObj.hasOwnProperty("birthYear")); */
+
+/////////////////////////////////////////////////
+// Constructor function
+/////////////////////////////////////////////////////
+function Person(nickName, birthYear) {
+  this.nickName = nickName;
+  this.birthYear = birthYear;
+
+  // Never do
+  // this.calcAge = function () {
+  //   console.log(2022 - birthYear);
+  // };
+}
+
+const sadril = new Person("Sadril", 1995);
+const nasim = new Person("Nasim", 1998);
+const fahim = new Person("Fahim", 1995);
+
+// 1. New {} will create
+// 2. function will be called, this = {}
+// 3. {} linked to prototype
+// 4. function will automatically returns {}
+
+console.log(sadril);
+console.log(nasim);
+console.log(fahim);
+
+console.log(sadril instanceof Person);
+
+Person.prototype.calcAge = function () {
+  console.log(2022 - this.birthYear);
+};
+
+sadril.calcAge();
+nasim.calcAge();
+
+console.log(Person.prototype);
+
+console.log(sadril.__proto__ === Person.prototype);
+console.log(Person.prototype === Person.prototype);
+
+console.log(Person.prototype.isPrototypeOf(sadril));
+console.log(Person.prototype.isPrototypeOf(fahim));
+console.log(Person.prototype.isPrototypeOf(Person));
