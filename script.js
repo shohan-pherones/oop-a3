@@ -26,11 +26,11 @@ const student2 = new Student("Sadril Amin", 1996);
 
 console.log(student1.calcbirthYear());
 
-// console.log(student1.__proto__);
+// console.log(student1.##proto##);
 
 const arr = [1, 2, 3];
 
-console.log(arr.__proto__.__proto__);
+console.log(arr.##proto##.##proto##);
 console.log(arr.indexOf(3));
 
 // Object
@@ -122,7 +122,7 @@ nasim.calcbirthYear();
 
 console.log(Person.prototype);
 
-console.log(sadril.__proto__ === Person.prototype);
+console.log(sadril.##proto## === Person.prototype);
 console.log(Person.prototype === Person.prototype);
 
 console.log(Person.prototype.isPrototypeOf(sadril));
@@ -164,7 +164,7 @@ console.dir(h1); */
 // ES6 Classes
 /////////////////////////////////////
 
-class Person {
+/* class Person {
   constructor(fullName, birthYear) {
     this.fullName = fullName;
     this.birthYear = birthYear;
@@ -190,10 +190,10 @@ kajol.calcAge();
 console.log(kajol);
 kajol.greet();
 console.log(sadril);
-console.log(Person.prototype === kajol.__proto__);
+console.log(Person.prototype === kajol.##proto##);
 console.log(Person.prototype.constructor);
 
-Person.couponCode();
+Person.couponCode(); */
 // kajol.couponCode();
 // Person.calcAge();
 
@@ -232,7 +232,7 @@ abdullah.audienceCount("Abdullah");
 console.log(abdullah);
 abdullah.seatCount; */
 
-///////////////////////////////////////////
+/* ///////////////////////////////////////////
 // Object.create()
 ///////////////////////////////////////////
 
@@ -249,4 +249,125 @@ jessica.birthYear = 1990;
 
 console.log(jessica);
 
+jessica.calcAge(); */
+
+// Inheritance between multiple classes:
+// 1. Constructor function
+// 2. ES6 classes
+// 3. Object.create()
+
+///////////////////////////////////////////////////////
+// 1. Constructor function:
+/////////////////////////////////////////////
+
+/* // Class 1
+function Person(firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+}
+
+// Method of Class 1
+Person.prototype.calcAge = function () {
+  console.log(2022 - this.birthYear);
+};
+
+Person.prototype.greet = function () {
+  console.log(`Hello, ${this.firstName}`);
+};
+
+// Obejct from Class 1
+const tumpa = new Person("Tumpa", 1996);
+console.log(tumpa);
+tumpa.calcAge();
+
+// Class 2
+function Student(firstName, birthYear, department) {
+  Person.call(this, firstName, birthYear);
+  this.department = department;
+}
+
+// Linking prototypes between class 1 and class 2
+// Student.prototype = Person.prototype; // don't do this
+Student.prototype = Object.create(Person.prototype);
+
+const sabrina = new Student("Sabrina", 1996, "CSE");
+console.log(sabrina);
+sabrina.calcAge();
+console.log(Person.prototype);
+console.log(Student.prototype);
+sabrina.greet();
+tumpa.greet(); */
+
+////////////////////////////////////////////////////
+// 2. ES6 classes
+/////////////////////////////////////////////
+
+class Player {
+  #tokenNum; // init private field
+  #password = 1234;
+
+  constructor(nickName, jerseyNum, rating, tokenNum) {
+    this.nickName = nickName;
+    this.jerseyNum = jerseyNum;
+    this.rating = rating;
+    this.#tokenNum = tokenNum; // assign
+    // console.log(this.#password);
+    this.#greet();
+    this.#playerRating();
+  }
+
+  #greet() {
+    console.log(`Hi, ${this.nickName}`);
+  }
+
+  #playerRating() {
+    console.log(`${this.nickName} has ${this.rating} ratings.`);
+  }
+}
+
+const neymar = new Player("Neymar", 10, 90);
+
+class Captain extends Player {
+  constructor(nickName, jerseyNum, rating, bandColor) {
+    super(nickName, jerseyNum, rating);
+    this.bandColor = bandColor;
+  }
+}
+
+const fabinho = new Captain("Fabinho", 11, 85, "red");
+
+/* neymar.#greet();
+fabinho.#greet();
+fabinho.#playerRating();
+neymar.#playerRating(); */
+
+///////////////////////////////////////////////////////////////
+// Object.create()
+///////////////////////////////////////////////////////////////
+
+/* const PersonProto = {
+  calcAge() {
+    console.log(2042 - this.birthYear);
+  },
+
+  getParam(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const jessica = Object.create(PersonProto);
+
+jessica.getParam("Jessica", 1995);
+
+console.log(jessica);
 jessica.calcAge();
+
+// New prototype
+const StudentProto = Object.create(PersonProto);
+
+const natasha = Object.create(StudentProto);
+
+natasha.getParam("Natasha", 1998);
+natasha.calcAge();
+ */
